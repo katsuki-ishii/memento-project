@@ -1,0 +1,21 @@
+/* 画面全体のレイアウト設定 */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* #app を縦方向のレイアウトにする */
+  #app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 画面全体を確保 */
+  }
+  
+  /* メインコンテンツエリア */
+  .main-content {
+    flex: 1; /* 可変部分 */
+  }
+  
