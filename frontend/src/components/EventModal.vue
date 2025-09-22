@@ -2,13 +2,13 @@
   <div class="modal-overlay" @click="$emit('close')">
     <div class="modal-content" @click.stop>
       <h2>
-        Age: {{ age }}<br>
-        Week: {{ weekInYear }}/{{ totalWeeks }}<br>
+        Age: {{ age }}<br />
+        Week: {{ weekInYear }}/{{ totalWeeks }}<br />
         Life {{ percentagePassed }}/100％
       </h2>
       <div class="event-form">
-        <textarea 
-          v-model="eventText" 
+        <textarea
+          v-model="eventText"
           placeholder="イベントを入力してください"
         ></textarea>
         <button @click="saveEvent">保存</button>
@@ -27,8 +27,8 @@ export default {
   props: {
     week: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     age() {
@@ -43,14 +43,14 @@ export default {
     percentagePassed() {
       if (this.week && typeof this.week.number !== 'undefined') {
         // week.number は 1-indexed の通算週番号
-        return ((this.week.number / TOTAL_LIFE_WEEKS) * 100).toFixed(1);
+        return ((this.week.number / TOTAL_LIFE_WEEKS) * 100).toFixed(1)
       }
-      return 0;
-    }
+      return 0
+    },
   },
   data() {
     return {
-      eventText: ''
+      eventText: '',
     }
   },
   methods: {
@@ -58,12 +58,12 @@ export default {
       const { saveEvent } = useEventStorage()
       await saveEvent(this.week.number, this.eventText)
       this.$emit('close')
-    }
+    },
   },
   mounted() {
     const { getEvent } = useEventStorage()
     this.eventText = getEvent(this.week.number) || ''
-  }
+  },
 }
 </script>
 
@@ -120,4 +120,4 @@ button {
     transform: scale(1);
   }
 }
-</style> 
+</style>

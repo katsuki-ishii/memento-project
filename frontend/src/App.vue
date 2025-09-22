@@ -15,7 +15,11 @@
       </div>
     </header>
 
-    <div class="side-menu" :class="{ 'is-open': isMenuOpen }" v-if="!isAuthRoute">
+    <div
+      class="side-menu"
+      :class="{ 'is-open': isMenuOpen }"
+      v-if="!isAuthRoute"
+    >
       <div class="side-menu-content">
         <h2>Menu</h2>
         <nav>
@@ -24,7 +28,9 @@
               <router-link to="/" @click="closeMenu">ホーム</router-link>
             </li>
             <li>
-              <router-link to="/about" @click="closeMenu">Mementoについて</router-link>
+              <router-link to="/about" @click="closeMenu"
+                >Mementoについて</router-link
+              >
             </li>
             <li>
               <router-link to="/settings" @click="closeMenu">設定</router-link>
@@ -42,7 +48,15 @@
 
     <footer class="app-footer" v-if="!isAuthRoute">
       <div class="footer-content">
-        <p>Based on the <a href="https://waitbutwhy.com/2014/05/life-weeks.html" target="_blank">Your Life in Weeks</a> post by Tim Urban</p>
+        <p>
+          Based on the
+          <a
+            href="https://waitbutwhy.com/2014/05/life-weeks.html"
+            target="_blank"
+            >Your Life in Weeks</a
+          >
+          post by Tim Urban
+        </p>
       </div>
     </footer>
   </div>
@@ -52,32 +66,37 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import UserMenu from './components/UserMenu.vue'
-import { useAuth } from '@/composables/useAuth';
+import { useAuth } from '@/composables/useAuth'
 
 export default {
   name: 'App',
   components: {
-    UserMenu
+    UserMenu,
   },
   setup() {
-    const { checkAuthState } = useAuth();
+    const { checkAuthState } = useAuth()
 
     onMounted(() => {
-      checkAuthState();
-    });
+      checkAuthState()
+    })
 
     const route = useRoute()
     const isMenuOpen = ref(false)
     const isUserMenuOpen = ref(false)
 
     const isAuthRoute = computed(() => {
-      const authRoutes = ['/login', '/signup', '/request-password-reset', '/reset-password']
-      return authRoutes.some(path => route.path.startsWith(path))
+      const authRoutes = [
+        '/login',
+        '/signup',
+        '/request-password-reset',
+        '/reset-password',
+      ]
+      return authRoutes.some((path) => route.path.startsWith(path))
     })
 
     const toggleMenu = () => {
       isMenuOpen.value = !isMenuOpen.value
-      if (isUserMenuOpen.value) isUserMenuOpen.value = false;
+      if (isUserMenuOpen.value) isUserMenuOpen.value = false
     }
 
     const closeMenu = () => {
@@ -86,7 +105,7 @@ export default {
 
     const toggleUserMenu = () => {
       isUserMenuOpen.value = !isUserMenuOpen.value
-      if (isMenuOpen.value) isMenuOpen.value = false;
+      if (isMenuOpen.value) isMenuOpen.value = false
     }
 
     return {
@@ -95,15 +114,17 @@ export default {
       closeMenu,
       isUserMenuOpen,
       toggleUserMenu,
-      isAuthRoute
+      isAuthRoute,
     }
-  }
+  },
 }
 </script>
 
 <style>
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
 }
 
 .app {
@@ -112,7 +133,8 @@ body {
   flex-direction: column;
 }
 
-.app-header, .app-footer {
+.app-header,
+.app-footer {
   background-color: #333;
   color: #fff;
   width: 1000px;
@@ -125,7 +147,8 @@ body {
   border-radius: 12px 12px 0 0;
 }
 
-.header-content, .footer-content {
+.header-content,
+.footer-content {
   margin: 0 auto;
   padding: 0.1rem 2rem;
   text-align: center;

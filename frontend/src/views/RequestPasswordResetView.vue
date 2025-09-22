@@ -1,17 +1,25 @@
 <template>
   <div class="request-password-reset-view auth-page">
     <h1>パスワードリセット</h1>
-    <form @submit.prevent="handleRequestReset" class="auth-form" v-if="!message">
-      <p class="form-description">登録済みのメールアドレスを入力してください。パスワードリセット用のリンクを記載したメールを送信します。</p>
+    <form
+      @submit.prevent="handleRequestReset"
+      class="auth-form"
+      v-if="!message"
+    >
+      <p class="form-description">
+        登録済みのメールアドレスを入力してください。パスワードリセット用のリンクを記載したメールを送信します。
+      </p>
       <div class="form-group">
         <label for="email">メールアドレス:</label>
-        <input type="email" id="email" v-model="email" required>
+        <input type="email" id="email" v-model="email" required />
       </div>
       <button type="submit">リセットメールを送信</button>
     </form>
     <div v-if="message" class="feedback-message success">
       <p>{{ message }}</p>
-      <router-link to="/login" class="back-link">ログイン画面に戻る</router-link>
+      <router-link to="/login" class="back-link"
+        >ログイン画面に戻る</router-link
+      >
     </div>
   </div>
 </template>
@@ -22,17 +30,17 @@ export default {
   data() {
     return {
       email: '',
-      message: ''
+      message: '',
     }
   },
   methods: {
     handleRequestReset() {
       // TODO: This is a placeholder. In a real application, you would make an API call to your backend
       // to request a password reset email. The backend would then handle sending the email.
-      console.log('Password reset requested for:', this.email);
-      this.message = `もし ${this.email} が当サービスに登録されていれば、パスワードリセット手順を記載したメールが送信されます。メールをご確認ください。`;
-    }
-  }
+      console.log('Password reset requested for:', this.email)
+      this.message = `もし ${this.email} が当サービスに登録されていれば、パスワードリセット手順を記載したメールが送信されます。メールをご確認ください。`
+    },
+  },
 }
 </script>
 
@@ -45,7 +53,7 @@ export default {
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -137,4 +145,4 @@ h1 {
 .feedback-message .back-link:hover {
   text-decoration: underline;
 }
-</style> 
+</style>

@@ -20,6 +20,6 @@ export function useEventStorage() {
   return {
     getEvents,
     saveEvent,
-    getEvent
+    getEvent,
   }
-} 
+}

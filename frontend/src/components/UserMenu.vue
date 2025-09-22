@@ -15,29 +15,29 @@
 </template>
 
 <script>
-import { useAuth } from '@/composables/useAuth';
-import { useRouter } from 'vue-router';
+import { useAuth } from '@/composables/useAuth'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'UserMenu',
   props: {
-    isOpen: Boolean
+    isOpen: Boolean,
   },
   setup(_, { emit }) {
-    const { user, signOut } = useAuth();
-    const router = useRouter();
+    const { user, signOut } = useAuth()
+    const router = useRouter()
 
     const logout = async () => {
-      await signOut();
-      router.push('/');
-      emit('close');
-    };
+      await signOut()
+      router.push('/')
+      emit('close')
+    }
 
     return {
       user,
-      logout
-    };
-  }
+      logout,
+    }
+  },
 }
 </script>
 
@@ -49,7 +49,7 @@ export default {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   min-width: 150px;
   overflow: hidden; /* For the animation */
@@ -83,7 +83,9 @@ export default {
 /* Slide down animation */
 .slide-down-enter-active,
 .slide-down-leave-active {
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transition:
+    transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   transform-origin: top center;
 }
 
@@ -98,4 +100,4 @@ export default {
   transform: scaleY(1) translateY(0);
   opacity: 1;
 }
-</style> 
+</style>

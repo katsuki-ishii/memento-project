@@ -1,104 +1,135 @@
 <template>
   <div class="signup-view auth-page">
     <h1>サインアップ</h1>
-    <form @submit.prevent="handleSignup" class="auth-form" v-if="step === 'signup'">
+    <form
+      @submit.prevent="handleSignup"
+      class="auth-form"
+      v-if="step === 'signup'"
+    >
       <div class="form-group">
         <label for="email">メールアドレス:</label>
-        <input type="email" id="email" v-model="email" required>
+        <input type="email" id="email" v-model="email" required />
       </div>
       <div class="form-group">
         <label for="password">パスワード:</label>
-        <input type="password" id="password" v-model="password" required>
+        <input type="password" id="password" v-model="password" required />
         <p class="form-hint">10文字以上で入力してください</p>
       </div>
       <div class="form-group">
         <label for="confirmPassword">パスワード (確認):</label>
-        <input type="password" id="confirmPassword" v-model="confirmPassword" required>
+        <input
+          type="password"
+          id="confirmPassword"
+          v-model="confirmPassword"
+          required
+        />
       </div>
       <button type="submit">サインアップ</button>
       <p class="switch-form">
-        すでにアカウントをお持ちですか？ <router-link to="/login">ログイン</router-link>
+        すでにアカウントをお持ちですか？
+        <router-link to="/login">ログイン</router-link>
       </p>
     </form>
 
-    <form @submit.prevent="handleConfirmation" class="auth-form" v-if="step === 'confirm'">
+    <form
+      @submit.prevent="handleConfirmation"
+      class="auth-form"
+      v-if="step === 'confirm'"
+    >
       <div class="form-group">
         <label for="confirmationCode">確認コード:</label>
-        <input type="text" id="confirmationCode" v-model="confirmationCode" required>
+        <input
+          type="text"
+          id="confirmationCode"
+          v-model="confirmationCode"
+          required
+        />
       </div>
       <button type="submit">アカウントを有効化</button>
     </form>
 
-    <div v-if="message" class="feedback-message" :class="{ 'success': !error, 'error': error }">
+    <div
+      v-if="message"
+      class="feedback-message"
+      :class="{ success: !error, error: error }"
+    >
       <p>{{ message }}</p>
-      <router-link v-if="!error && step === 'confirm'" to="/login" class="back-link">ログイン画面に進む</router-link>
+      <router-link
+        v-if="!error && step === 'confirm'"
+        to="/login"
+        class="back-link"
+        >ログイン画面に進む</router-link
+      >
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
-import { useAuth } from '@/composables/useAuth';
-import { useRouter } from 'vue-router';
+import { ref } from 'vue'
+import { useAuth } from '@/composables/useAuth'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'SignupView',
   setup() {
-    const { signUp, confirmSignUp } = useAuth();
-    const router = useRouter();
+    const { signUp, confirmSignUp } = useAuth()
+    const router = useRouter()
 
-    const email = ref('');
-    const password = ref('');
-    const confirmPassword = ref('');
-    const confirmationCode = ref('');
-    
-    const step = ref('signup'); // 'signup' or 'confirm'
-    const message = ref('');
-    const error = ref(false);
+    const email = ref('')
+    const password = ref('')
+    const confirmPassword = ref('')
+    const confirmationCode = ref('')
+
+    const step = ref('signup') // 'signup' or 'confirm'
+    const message = ref('')
+    const error = ref(false)
 
     const handleSignup = async () => {
-      message.value = '';
-      error.value = false;
+      message.value = ''
+      error.value = false
 
       if (password.value.length < 10) {
-        error.value = true;
-        message.value = 'パスワードは10文字以上で入力してください。';
-        return;
+        error.value = true
+        message.value = 'パスワードは10文字以上で入力してください。'
+        return
       }
 
       if (password.value !== confirmPassword.value) {
-        error.value = true;
-        message.value = 'パスワードが一致しません。';
-        return;
+        error.value = true
+        message.value = 'パスワードが一致しません。'
+        return
       }
 
-      const result = await signUp(email.value, password.value);
+      const result = await signUp(email.value, password.value)
 
       if (result.success) {
-        step.value = 'confirm';
-        message.value = '確認コードをメールアドレスに送信しました。コードを入力して登録を完了してください。';
+        step.value = 'confirm'
+        message.value =
+          '確認コードをメールアドレスに送信しました。コードを入力して登録を完了してください。'
       } else {
-        error.value = true;
-        message.value = result.error.message || 'サインアップ中にエラーが発生しました。';
+        error.value = true
+        message.value =
+          result.error.message || 'サインアップ中にエラーが発生しました。'
       }
-    };
+    }
 
     const handleConfirmation = async () => {
-      message.value = '';
-      error.value = false;
+      message.value = ''
+      error.value = false
 
-      const result = await confirmSignUp(email.value, confirmationCode.value);
+      const result = await confirmSignUp(email.value, confirmationCode.value)
 
       if (result.success) {
-        message.value = 'アカウントの確認が完了しました。ログインしてください。';
+        message.value = 'アカウントの確認が完了しました。ログインしてください。'
         setTimeout(() => {
-          router.push('/login');
-        }, 3000);
+          router.push('/login')
+        }, 3000)
       } else {
-        error.value = true;
-        message.value = result.error.message || '確認コードの認証中にエラーが発生しました。';
+        error.value = true
+        message.value =
+          result.error.message || '確認コードの認証中にエラーが発生しました。'
       }
-    };
+    }
 
     return {
       email,
@@ -109,9 +140,9 @@ export default {
       message,
       error,
       handleSignup,
-      handleConfirmation
-    };
-  }
+      handleConfirmation,
+    }
+  },
 }
 </script>
 
@@ -124,7 +155,7 @@ export default {
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -234,4 +265,4 @@ h1 {
 .feedback-message .back-link:hover {
   text-decoration: underline;
 }
-</style> 
+</style>

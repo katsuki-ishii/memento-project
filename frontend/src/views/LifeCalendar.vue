@@ -4,8 +4,9 @@
       <WeekGrid :weeks="weeks" />
     </div>
     <div v-else class="placeholder">
-      誕生日が設定されていません。<br>
-      <router-link to="/settings">設定ページ</router-link>で誕生日を入力してください。
+      誕生日が設定されていません。<br />
+      <router-link to="/settings">設定ページ</router-link
+      >で誕生日を入力してください。
     </div>
   </div>
 </template>
@@ -18,19 +19,22 @@ import { onMounted } from 'vue'
 export default {
   name: 'LifeCalendar',
   components: {
-    WeekGrid
+    WeekGrid,
   },
   setup() {
     const { weeks, birthday } = useWeeks()
 
     onMounted(() => {
-      console.log('LifeCalendar.vue: Component mounted. Birthday:', birthday.value)
+      console.log(
+        'LifeCalendar.vue: Component mounted. Birthday:',
+        birthday.value,
+      )
     })
 
     return {
-      weeks
+      weeks,
     }
-  }
+  },
 }
 </script>
 <style scoped>
@@ -66,4 +70,4 @@ export default {
   justify-content: center;
   align-items: center;
 }
-</style> 
+</style>

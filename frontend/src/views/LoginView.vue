@@ -7,55 +7,59 @@
       </div>
       <div class="form-group">
         <label for="email">メールアドレス:</label>
-        <input type="email" id="email" v-model="email" required>
+        <input type="email" id="email" v-model="email" required />
       </div>
       <div class="form-group">
         <label for="password">パスワード:</label>
-        <input type="password" id="password" v-model="password" required>
+        <input type="password" id="password" v-model="password" required />
       </div>
       <button type="submit">ログイン</button>
       <p class="switch-form">
-        アカウントをお持ちでないですか？ <router-link to="/signup">サインアップ</router-link>
+        アカウントをお持ちでないですか？
+        <router-link to="/signup">サインアップ</router-link>
       </p>
       <p class="forgot-password">
-        <router-link to="/request-password-reset">パスワードをお忘れですか？</router-link>
+        <router-link to="/request-password-reset"
+          >パスワードをお忘れですか？</router-link
+        >
       </p>
     </form>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
-import { useAuth } from '@/composables/useAuth';
-import { useRouter } from 'vue-router';
+import { ref } from 'vue'
+import { useAuth } from '@/composables/useAuth'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'LoginView',
   setup() {
-    const { signIn } = useAuth();
-    const router = useRouter();
+    const { signIn } = useAuth()
+    const router = useRouter()
 
-    const email = ref('');
-    const password = ref('');
-    const error = ref(null);
+    const email = ref('')
+    const password = ref('')
+    const error = ref(null)
 
     const handleLogin = async () => {
-      error.value = null;
-      const result = await signIn(email.value, password.value);
+      error.value = null
+      const result = await signIn(email.value, password.value)
       if (result.success) {
-        router.push('/');
+        router.push('/')
       } else {
-        error.value = result.error.message || 'ログイン中にエラーが発生しました。';
+        error.value =
+          result.error.message || 'ログイン中にエラーが発生しました。'
       }
-    };
+    }
 
     return {
       email,
       password,
       error,
-      handleLogin
-    };
-  }
+      handleLogin,
+    }
+  },
 }
 </script>
 
@@ -67,7 +71,7 @@ export default {
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -140,4 +144,4 @@ h1 {
 .forgot-password a:hover {
   text-decoration: underline;
 }
-</style> 
+</style>

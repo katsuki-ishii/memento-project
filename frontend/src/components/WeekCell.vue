@@ -1,13 +1,12 @@
 <template>
-  <div 
-    class="week-cell" 
+  <div
+    class="week-cell"
     :class="{
       'has-event': week.hasEvent,
-      'is-past': week.isPast
+      'is-past': week.isPast,
     }"
     @click="$emit('click')"
-  >
-  </div>
+  ></div>
 </template>
 
 <script>
@@ -16,9 +15,9 @@ export default {
   props: {
     week: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 
@@ -39,12 +38,12 @@ export default {
 }
 
 .week-cell.has-event {
-  background-color: #4CAF50;
-  border-color: #388E3C;
+  background-color: #4caf50;
+  border-color: #388e3c;
 }
 
 .week-cell.is-past {
-  background-color: #9E9E9E;
+  background-color: #9e9e9e;
   border-color: #757575;
 }
-</style> 
+</style>

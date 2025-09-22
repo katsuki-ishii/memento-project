@@ -8,8 +8,8 @@
     </div>
     <div class="grid-and-week-labels">
       <div class="week-grid">
-        <WeekCell 
-          v-for="(week, index) in weeks" 
+        <WeekCell
+          v-for="(week, index) in weeks"
           :key="index"
           :week="week"
           @click="openEventModal(week)"
@@ -28,18 +28,18 @@ export default {
   name: 'WeekGrid',
   components: {
     WeekCell,
-    EventModal
+    EventModal,
   },
   props: {
     weeks: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       showModal: false,
-      selectedWeek: null
+      selectedWeek: null,
     }
   },
   methods: {
@@ -50,8 +50,8 @@ export default {
     closeModal() {
       this.showModal = false
       this.selectedWeek = null
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -110,4 +110,4 @@ export default {
   gap: 2px;
   padding: 20px;
 }
-</style> 
+</style>

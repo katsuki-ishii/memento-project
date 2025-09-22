@@ -1,25 +1,40 @@
 <template>
   <div class="reset-password-view auth-page">
     <h1>新しいパスワードを設定</h1>
-    <form @submit.prevent="handleResetPassword" class="auth-form" v-if="!message">
-      <p class="form-description">新しいパスワードを入力し、確認のためもう一度入力してください。</p>
+    <form
+      @submit.prevent="handleResetPassword"
+      class="auth-form"
+      v-if="!message"
+    >
+      <p class="form-description">
+        新しいパスワードを入力し、確認のためもう一度入力してください。
+      </p>
       <div class="form-group">
         <label for="password">新しいパスワード:</label>
-        <input type="password" id="password" v-model="password" required>
+        <input type="password" id="password" v-model="password" required />
       </div>
       <div class="form-group">
         <label for="confirmPassword">新しいパスワード (確認):</label>
-        <input type="password" id="confirmPassword" v-model="confirmPassword" required>
+        <input
+          type="password"
+          id="confirmPassword"
+          v-model="confirmPassword"
+          required
+        />
       </div>
       <button type="submit">パスワードを更新</button>
     </form>
     <div v-if="message" class="feedback-message success">
       <p>{{ message }}</p>
-      <router-link to="/login" class="back-link">ログイン画面に進む</router-link>
+      <router-link to="/login" class="back-link"
+        >ログイン画面に進む</router-link
+      >
     </div>
-     <div v-if="error" class="feedback-message error">
+    <div v-if="error" class="feedback-message error">
       <p>{{ error }}</p>
-      <router-link to="/request-password-reset" class="back-link error">再度リセットを試みる</router-link>
+      <router-link to="/request-password-reset" class="back-link error"
+        >再度リセットを試みる</router-link
+      >
     </div>
   </div>
 </template>
@@ -33,37 +48,45 @@ export default {
       password: '',
       confirmPassword: '',
       message: '',
-      error: ''
+      error: '',
     }
   },
   methods: {
     handleResetPassword() {
-      this.error = ''; // Clear previous errors
-      if (this.password.length < 6) { // Example validation
-        this.error = 'パスワードは6文字以上で入力してください。';
-        return;
+      this.error = '' // Clear previous errors
+      if (this.password.length < 6) {
+        // Example validation
+        this.error = 'パスワードは6文字以上で入力してください。'
+        return
       }
       if (this.password !== this.confirmPassword) {
-        this.error = '新しいパスワードが一致しません。';
-        return;
+        this.error = '新しいパスワードが一致しません。'
+        return
       }
       // TODO: This is a placeholder. In a real application, you would make an API call to your backend
       // to reset the password using the token and the new password.
-      console.log('Password reset attempt for token:', this.token, 'with new password:', this.password);
-      this.message = 'パスワードが正常に更新されました。新しいパスワードでログインしてください。';
+      console.log(
+        'Password reset attempt for token:',
+        this.token,
+        'with new password:',
+        this.password,
+      )
+      this.message =
+        'パスワードが正常に更新されました。新しいパスワードでログインしてください。'
       // Optionally, redirect after a delay:
       // setTimeout(() => this.$router.push('/login'), 3000);
-    }
+    },
   },
   mounted() {
     if (!this.token) {
-      console.error('Reset token is missing!');
-      this.error = '無効なリセットリンクです。お手数ですが、再度パスワードリセットを申請してください。';
+      console.error('Reset token is missing!')
+      this.error =
+        '無効なリセットリンクです。お手数ですが、再度パスワードリセットを申請してください。'
       // In a real app, you might want to redirect or show a more specific error page.
     } else {
-      console.log('Reset password page loaded for token:', this.token);
+      console.log('Reset password page loaded for token:', this.token)
     }
-  }
+  },
 }
 </script>
 
@@ -76,7 +99,7 @@ export default {
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -181,4 +204,4 @@ h1 {
 .feedback-message .back-link:hover {
   text-decoration: underline;
 }
-</style> 
+</style>

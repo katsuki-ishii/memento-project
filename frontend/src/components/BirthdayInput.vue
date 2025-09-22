@@ -1,11 +1,11 @@
 <template>
   <div class="birthday-input">
     <label>誕生日を選択してください：</label>
-    <input 
-      type="date" 
+    <input
+      type="date"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
-    >
+    />
   </div>
 </template>
 
@@ -15,9 +15,9 @@ export default {
   props: {
     modelValue: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 
@@ -35,7 +35,7 @@ export default {
   color: #333;
 }
 
-input[type="date"] {
+input[type='date'] {
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -44,8 +44,8 @@ input[type="date"] {
   text-align: center;
 }
 
-input[type="date"]:focus {
+input[type='date']:focus {
   outline: none;
   border-color: #666;
 }
-</style> 
+</style>

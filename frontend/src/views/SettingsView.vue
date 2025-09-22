@@ -19,7 +19,7 @@ import { useWeeks } from '@/composables/useWeeks.js'
 export default {
   name: 'SettingsView',
   components: {
-    BirthdayInput
+    BirthdayInput,
   },
   setup() {
     const { birthday } = useWeeks()
@@ -33,9 +33,9 @@ export default {
 
     return {
       birthday,
-      saveSettings
+      saveSettings,
     }
-  }
+  },
 }
 </script>
 
@@ -59,7 +59,8 @@ h1 {
   border-radius: 8px;
 }
 
-h2, p {
+h2,
+p {
   text-align: left;
 }
 
