@@ -14,7 +14,7 @@ export const cognitoConfig = {
     // Amplify V6 uses a nested Cognito configuration object
     Cognito: {
       userPoolId: 'ap-northeast-1_MTARRu377',
-      userPoolWebClientId: '7rbmqb2l3c6f9pamlmevda7k22',
+      userPoolClientId: '7rbmqb2l3c6f9pamlmevda7k22',
     },
   },
 }
